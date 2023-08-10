@@ -15,7 +15,7 @@ class CountryCellSkeleton: UITableViewCell {
         stack.distribution = .fill
         stack.alignment = .center
         stack.spacing = 24
-        stack.backgroundColor = .white
+        stack.backgroundColor = UIColor(named: "SurfaceColor")
         stack.layer.shadowColor = UIColor.black.cgColor
         stack.layer.shadowOpacity = 0.2
         stack.layer.shadowOffset = .zero
@@ -51,33 +51,21 @@ class CountryCellSkeleton: UITableViewCell {
     }()
     
     private lazy var titleLabel = {
-        let label = UILabel()
-        label.text = "Country"
+        let label = DSLabel()
+        label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
+        label.text = " "
+        label.skeletonWidth = 120
+        label.startSkeleton()
         return label
-    }()
-    
-    private lazy var titleLayer = {
-        let gradient = CAGradientLayer()
-        gradient.startPoint = CGPoint(x: 0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 0.5)
-        gradient.frame = CGRect(x: 0, y: 0, width: 120, height: 21)
-        gradient.cornerRadius = 8
-        return gradient
     }()
     
     private lazy var capitalLabel = {
-        let label = UILabel()
-        label.text = "Capital"
+        let label = DSLabel()
+        label.text = " "
+        label.font = UIFont.systemFont(ofSize: 18.0)
+        label.skeletonWidth = 80
+        label.startSkeleton()
         return label
-    }()
-    
-    private lazy var capitalLayer = {
-        let gradient = CAGradientLayer()
-        gradient.startPoint = CGPoint(x: 0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 0.5)
-        gradient.frame = CGRect(x: 0, y: 0, width: 80, height: 21)
-        gradient.cornerRadius = 8
-        return gradient
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -95,18 +83,9 @@ class CountryCellSkeleton: UITableViewCell {
 extension CountryCellSkeleton {
     func setup() {
         selectionStyle = .none
-        titleLabel.layer.addSublayer(titleLayer)
-        
-        let titleGroup = makeAnimationGroup()
-        titleGroup.beginTime = 0.0
-        titleLayer.add(titleGroup, forKey: "backgroundColor")
-        
-        capitalLabel.layer.addSublayer(capitalLayer)
-        
-        let capitalGroup = makeAnimationGroup()
-        capitalGroup.beginTime = 0.0
-        capitalLayer.add(capitalGroup, forKey: "backgroundColor")
-        
+        backgroundColor = UIColor(named: "BackgroundColor")
+
+        // flag
         flag.layer.addSublayer(flagLayer)
         
         let flagGroup = makeAnimationGroup()
@@ -123,8 +102,8 @@ extension CountryCellSkeleton {
         
         NSLayoutConstraint.activate([
             // horizontal stack
-            horizontalStack.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            horizontalStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            horizontalStack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            horizontalStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             horizontalStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             horizontalStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             

@@ -18,7 +18,7 @@ struct HomeManager {
     private let baseURL = "https://restcountries.com/v3.1"
     
     public func getCountries() {
-        let urlString = "\(baseURL)/all"
+        let urlString = "\(baseURL)/all?fields=name,capital,flags"
         performRequest(for: urlString)
     }
     
@@ -30,11 +30,13 @@ struct HomeManager {
             let task = session.dataTask(with: url) { data, response, error in
                 if let e = error {
                     delegate?.didFailWithError(error: e)
+                    return
                 }
                 
                 if let safeData = data {
                     let countries = self.parseJSON(data: safeData)
                     delegate?.didUpdateData(countries: countries ?? [])
+                    return
                 }
             }
             

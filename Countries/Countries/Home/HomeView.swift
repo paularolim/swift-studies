@@ -7,12 +7,11 @@
 
 import UIKit
 
-class HomeView: UIView {
-    lazy var titleLabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+class HomeView: UIView {    
+    let titleLabel = {
+        let label = DSLabel(fontSize: .h2, fontWeight: .bold)
         label.text = "Countries"
-        label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
+        label.startSkeleton()
         return label
     }()
     
@@ -35,7 +34,8 @@ class HomeView: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "BackgroundColor")
+        list.backgroundColor = UIColor(named: "BackgroundColor")
     }
     
     private func addSubviews() {

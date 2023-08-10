@@ -28,7 +28,6 @@ class DetailsViewController: UIViewController {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .gray
         image.contentMode = .scaleAspectFill
-        image.image = UIImage(named: "br")
         return image
     }()
     
@@ -89,6 +88,7 @@ extension DetailsViewController: DetailsManagerDelegate {
         DispatchQueue.main.async {
             self.nameLabel.text = country.name
             self.capitalLabel.text = country.capital
+            self.flag.imageFromURL(country.flag)
         }
     }
     

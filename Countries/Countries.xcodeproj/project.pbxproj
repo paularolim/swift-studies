@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA1FCEBA2A7D73E600C328B9 /* DSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FCEB92A7D73E600C328B9 /* DSLabel.swift */; };
 		DA4CFDFA2A7AE4070090E38B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4CFDF92A7AE4070090E38B /* AppDelegate.swift */; };
 		DA4CFDFC2A7AE4070090E38B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4CFDFB2A7AE4070090E38B /* SceneDelegate.swift */; };
 		DA4CFE032A7AE4080090E38B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE022A7AE4080090E38B /* Assets.xcassets */; };
 		DA4CFE062A7AE4080090E38B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE042A7AE4080090E38B /* LaunchScreen.storyboard */; };
 		DA4CFE122A7AF5C30090E38B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4CFE112A7AF5C30090E38B /* Country.swift */; };
 		DA4CFE172A7B13360090E38B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4CFE162A7B13360090E38B /* DetailsViewController.swift */; };
+		DADA2CB52A7DA3BA0030B002 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADA2CB42A7DA3BA0030B002 /* UIImageView.swift */; };
 		DAF002E82A7BD3E300E05EEA /* CountriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF002E72A7BD3E300E05EEA /* CountriesResponse.swift */; };
 		DAF002EA2A7BDD8D00E05EEA /* DetailsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF002E92A7BDD8D00E05EEA /* DetailsManager.swift */; };
-		DAF002F82A7BFE2400E05EEA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF002F72A7BFE2400E05EEA /* Colors.swift */; };
 		DAF002FC2A7C06AF00E05EEA /* SkeletonLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF002FB2A7C06AF00E05EEA /* SkeletonLoadable.swift */; };
 		DAF003072A7C21D800E05EEA /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF003062A7C21D800E05EEA /* CustomViewController.swift */; };
 		DAF0030A2A7C275600E05EEA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF003092A7C275600E05EEA /* HomeViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA1FCEB92A7D73E600C328B9 /* DSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSLabel.swift; sourceTree = "<group>"; };
 		DA4CFDF62A7AE4070090E38B /* Countries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4CFDF92A7AE4070090E38B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA4CFDFB2A7AE4070090E38B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,9 +36,9 @@
 		DA4CFE072A7AE4080090E38B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA4CFE112A7AF5C30090E38B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		DA4CFE162A7B13360090E38B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		DADA2CB42A7DA3BA0030B002 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		DAF002E72A7BD3E300E05EEA /* CountriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesResponse.swift; sourceTree = "<group>"; };
 		DAF002E92A7BDD8D00E05EEA /* DetailsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsManager.swift; sourceTree = "<group>"; };
-		DAF002F72A7BFE2400E05EEA /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		DAF002FB2A7C06AF00E05EEA /* SkeletonLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLoadable.swift; sourceTree = "<group>"; };
 		DAF003062A7C21D800E05EEA /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		DAF003092A7C275600E05EEA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA1FCEB82A7D73D200C328B9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DA1FCEB92A7D73E600C328B9 /* DSLabel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DA4CFDED2A7AE4070090E38B = {
 			isa = PBXGroup;
 			children = (
@@ -106,11 +116,20 @@
 			path = Details;
 			sourceTree = "<group>";
 		};
+		DADA2CB32A7DA3A70030B002 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DADA2CB42A7DA3BA0030B002 /* UIImageView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		DAF002F02A7BF03E00E05EEA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				DADA2CB32A7DA3A70030B002 /* Extension */,
+				DA1FCEB82A7D73D200C328B9 /* View */,
 				DA4CFE102A7AF5B50090E38B /* Model */,
-				DAF002F72A7BFE2400E05EEA /* Colors.swift */,
 				DAF003062A7C21D800E05EEA /* CustomViewController.swift */,
 				DAF002FB2A7C06AF00E05EEA /* SkeletonLoadable.swift */,
 			);
@@ -122,8 +141,8 @@
 			children = (
 				DAF003092A7C275600E05EEA /* HomeViewController.swift */,
 				DAF0030B2A7C277900E05EEA /* HomeView.swift */,
-				DAF0030D2A7C2B7100E05EEA /* CountryCellSkeleton.swift */,
 				DAF0030F2A7C451C00E05EEA /* HomeManager.swift */,
+				DAF0030D2A7C2B7100E05EEA /* CountryCellSkeleton.swift */,
 				DAF003112A7C46AC00E05EEA /* CountryCell.swift */,
 			);
 			path = Home;
@@ -201,15 +220,16 @@
 			files = (
 				DAF002FC2A7C06AF00E05EEA /* SkeletonLoadable.swift in Sources */,
 				DAF0030C2A7C277900E05EEA /* HomeView.swift in Sources */,
+				DA1FCEBA2A7D73E600C328B9 /* DSLabel.swift in Sources */,
 				DA4CFE122A7AF5C30090E38B /* Country.swift in Sources */,
 				DAF003122A7C46AC00E05EEA /* CountryCell.swift in Sources */,
 				DAF0030E2A7C2B7100E05EEA /* CountryCellSkeleton.swift in Sources */,
 				DA4CFDFA2A7AE4070090E38B /* AppDelegate.swift in Sources */,
 				DA4CFDFC2A7AE4070090E38B /* SceneDelegate.swift in Sources */,
+				DADA2CB52A7DA3BA0030B002 /* UIImageView.swift in Sources */,
 				DAF0030A2A7C275600E05EEA /* HomeViewController.swift in Sources */,
 				DAF003072A7C21D800E05EEA /* CustomViewController.swift in Sources */,
 				DAF002E82A7BD3E300E05EEA /* CountriesResponse.swift in Sources */,
-				DAF002F82A7BFE2400E05EEA /* Colors.swift in Sources */,
 				DAF002EA2A7BDD8D00E05EEA /* DetailsManager.swift in Sources */,
 				DAF003102A7C451C00E05EEA /* HomeManager.swift in Sources */,
 				DA4CFE172A7B13360090E38B /* DetailsViewController.swift in Sources */,

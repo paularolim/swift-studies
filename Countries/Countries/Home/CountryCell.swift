@@ -15,7 +15,7 @@ class CountryCell: UITableViewCell {
         stack.distribution = .fill
         stack.alignment = .center
         stack.spacing = 24
-        stack.backgroundColor = .white
+        stack.backgroundColor = UIColor(named: "SurfaceColor")
         stack.layer.shadowColor = UIColor.black.cgColor
         stack.layer.shadowOpacity = 0.2
         stack.layer.shadowOffset = .zero
@@ -33,10 +33,9 @@ class CountryCell: UITableViewCell {
         return stack
     }()
     
-    private lazy var flag = {
+    lazy var flag = {
         let image = UIImageView()
         image.backgroundColor = .gray
-        image.image = UIImage(named: "br")
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 12
         image.clipsToBounds = true
@@ -46,12 +45,16 @@ class CountryCell: UITableViewCell {
     lazy var titleLabel = {
         let label = UILabel()
         label.text = "Country"
+        label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
+        label.textColor = UIColor(named: "TextColor")
         return label
     }()
     
     lazy var capitalLabel = {
         let label = UILabel()
         label.text = "Capital"
+        label.font = UIFont.systemFont(ofSize: 18.0)
+        label.textColor = UIColor(named: "TextColor")
         return label
     }()
     
@@ -70,6 +73,7 @@ class CountryCell: UITableViewCell {
 extension CountryCell {
     func setup() {
         selectionStyle = .none
+        backgroundColor = UIColor(named: "BackgroundColor")
     }
     
     func addSubviews() {
@@ -81,10 +85,13 @@ extension CountryCell {
         
         NSLayoutConstraint.activate([
             // horizontal stack
-            horizontalStack.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            horizontalStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            horizontalStack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            horizontalStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             horizontalStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             horizontalStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor, constant: 0),
+            titleLabel.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor, constant: -12),
             
             // flag image
             flag.widthAnchor.constraint(equalToConstant: 120),

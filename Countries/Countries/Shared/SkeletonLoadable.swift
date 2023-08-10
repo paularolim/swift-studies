@@ -14,14 +14,14 @@ extension SkeletonLoadable {
         let animDuration: CFTimeInterval = 1.5
         
         let anim1 = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
-        anim1.fromValue = UIColor.gradientLightGrey.cgColor
-        anim1.toValue = UIColor.gradientDarkGrey.cgColor
+        anim1.fromValue = UIColor(named: "ShimmerLightColor")?.cgColor
+        anim1.toValue = UIColor(named: "ShimmerDarkColor")?.cgColor
         anim1.duration = animDuration
         anim1.beginTime = 0.0
         
         let anim2 = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
-        anim2.fromValue = UIColor.gradientDarkGrey.cgColor
-        anim2.toValue = UIColor.gradientLightGrey.cgColor
+        anim2.fromValue = UIColor(named: "ShimmerDarkColor")?.cgColor
+        anim2.toValue = UIColor(named: "ShimmerLightColor")?.cgColor
         anim2.duration = animDuration
         anim2.beginTime = anim1.beginTime + anim1.duration
         

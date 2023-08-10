@@ -57,6 +57,7 @@ extension HomeViewController: UITableViewDataSource {
             let country = countries[indexPath.row]
             
             let cell = rootView.list.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath) as! CountryCell
+            cell.flag.imageFromURL(country.flag)
             cell.titleLabel.text = country.name
             cell.capitalLabel.text = country.capital
             return cell
@@ -81,6 +82,7 @@ extension HomeViewController: HomeManagerDelegate {
         self.isLoading = false
         self.countries = countries
         DispatchQueue.main.async {
+            self.rootView.titleLabel.stopSkeleton()
             self.rootView.list.reloadData()
         }
     }
