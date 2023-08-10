@@ -11,6 +11,7 @@ struct CountriesResponse: Decodable {
     let name: Name
     let capital: [String]?
     let flags: Flags
+    let cca2: String
     
     struct Name: Decodable {
         let common: String

@@ -11,7 +11,7 @@ class DetailsViewController: CustomViewController<DetailsView> {
     private var detailsManager = DetailsManager()
     
     private var country: Country?
-    public var searchCountry: String?
+    public var searchCode: String?
 
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -25,8 +25,8 @@ class DetailsViewController: CustomViewController<DetailsView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if searchCountry != nil {
-            detailsManager.getDetails(name: searchCountry!)
+        if searchCode != nil && searchCode != "" {
+            detailsManager.getDetails(code: searchCode!)
         }
     }
 }

@@ -17,9 +17,8 @@ struct DetailsManager {
     
     private let baseURL = "https://restcountries.com/v3.1"
     
-    public func getDetails(name: String) {
-        let formattedString = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let urlString = "\(baseURL)/name/\(formattedString!)"
+    public func getDetails(code: String) {
+        let urlString = "\(baseURL)/alpha/\(code)"
         performRequest(for: urlString)
     }
     
@@ -49,7 +48,12 @@ struct DetailsManager {
         do {
             let decoder = JSONDecoder()
             let response = try decoder.decode([CountriesResponse].self, from: data)
-            return Country(name: response[0].name.common, capital: response[0].capital?.joined(separator: " | ") ?? "", flag: response[0].flags.png)
+            return Country(
+                name: response[0].name.common,
+                capital: response[0].capital?.joined(separator: " | ") ?? "",
+                flag: response[0].flags.png,
+                code: response[0].cca2
+            )
         } catch {
             delegate?.didFailWithError(error: error)
             return nil

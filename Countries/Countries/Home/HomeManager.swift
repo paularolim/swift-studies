@@ -18,7 +18,7 @@ struct HomeManager {
     private let baseURL = "https://restcountries.com/v3.1"
     
     public func getCountries() {
-        let urlString = "\(baseURL)/all?fields=name,capital,flags"
+        let urlString = "\(baseURL)/all?fields=name,capital,flags,cca2"
         performRequest(for: urlString)
     }
     
@@ -51,7 +51,12 @@ struct HomeManager {
             
             var countries: [Country] = []
             for country in response {
-                let formatted = Country(name: country.name.common, capital: country.capital?.joined(separator: " | ") ?? "", flag: country.flags.png)
+                let formatted = Country(
+                    name: country.name.common,
+                    capital: country.capital?.joined(separator: " | ") ?? "",
+                    flag: country.flags.png,
+                    code: country.cca2
+                )
                 countries.append(formatted)
             }
             return countries

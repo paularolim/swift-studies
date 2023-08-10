@@ -71,7 +71,7 @@ extension HomeViewController: UITableViewDelegate {
             let countrySelected = countries[indexPath.row]
             
             let controller = DetailsViewController()
-            controller.searchCountry = countrySelected.name
+            controller.searchCode = countrySelected.code
             navigationController?.pushViewController(controller, animated: true)
         }
     }
