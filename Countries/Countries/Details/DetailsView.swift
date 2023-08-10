@@ -26,17 +26,31 @@ class DetailsView: UIView {
         return image
     }()
     
-    lazy var nameLabel: UILabel = {
-        let label = UILabel()
+    private lazy var flagLayer = {
+        let gradient = CAGradientLayer()
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1, y: 0.5)
+        gradient.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 3)
+        return gradient
+    }()
+    
+    lazy var nameLabel = {
+        let label = DSLabel()
         label.font = UIFont.systemFont(ofSize: 38, weight: .bold)
         label.numberOfLines = 0
+        label.text = " "
+        label.skeletonWidth = 220
+        label.startSkeleton()
         return label
     }()
     
-    lazy var capitalLabel: UILabel = {
-        let label = UILabel()
+    lazy var capitalLabel = {
+        let label = DSLabel()
         label.font = UIFont.systemFont(ofSize: 28)
         label.numberOfLines = 0
+        label.text = " "
+        label.skeletonWidth = 180
+        label.startSkeleton()
         return label
     }()
     
@@ -51,13 +65,25 @@ class DetailsView: UIView {
         fatalError()
     }
     
+    func stopSkeleton() {
+        nameLabel.stopSkeleton()
+        capitalLabel.stopSkeleton()
+        flag.layer.sublayers?.removeAll()
+    }
+    
     private func setupUI() {
         backgroundColor = UIColor(named: "BackgroundColor")
+        
+        let flagGroup = makeAnimationGroup()
+        flagGroup.beginTime = 0.0
+        flagLayer.add(flagGroup, forKey: "backgroundColor")
     }
     
     private func addSubviews() {
         addSubview(flag)
         addSubview(verticalStack)
+        
+        flag.layer.addSublayer(flagLayer)
     }
     
     private func addConstraints() {
@@ -74,3 +100,5 @@ class DetailsView: UIView {
         ])
     }
 }
+
+extension DetailsView: SkeletonLoadable {}

@@ -38,6 +38,8 @@ extension DetailsViewController: DetailsManagerDelegate {
             self.rootView.nameLabel.text = country.name
             self.rootView.capitalLabel.text = country.capital
             self.rootView.flag.imageFromURL(country.flag)
+            
+            self.rootView.stopSkeleton()
         }
     }
     
