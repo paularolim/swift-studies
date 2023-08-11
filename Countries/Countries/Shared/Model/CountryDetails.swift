@@ -7,9 +7,14 @@
 
 import UIKit
 
-struct Country {
+struct CountryDetails {
     let name: String
     let capital: String
     let flag: String
-    let code: String?
+    let language: String
+    let independent: Bool
+    let currencies: String
+    let region: String
+    let area: Int
+    let population: Int
 }
