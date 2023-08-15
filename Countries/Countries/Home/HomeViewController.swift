@@ -11,6 +11,7 @@ class HomeViewController: CustomViewController<HomeView> {
     
     private var isLoading = true
     private var countries: [Country] = []
+    private var countriesSearched: [Country] = []
     
     private var manager = HomeManager()
     
@@ -19,6 +20,8 @@ class HomeViewController: CustomViewController<HomeView> {
         
         manager.delegate = self
         manager.getCountries()
+        
+        rootView.searchField.delegate = self
         
         rootView.list.delegate = self
         rootView.list.dataSource = self
@@ -39,6 +42,16 @@ class HomeViewController: CustomViewController<HomeView> {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
     }
+    
+    private func searchCountries(for searchText: String) {
+        countriesSearched = []
+        for country in countries {
+            if country.name.range(of: searchText, options: .caseInsensitive) != nil {
+                countriesSearched.append(country)
+            }
+        }
+        rootView.list.reloadData()
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -46,7 +59,7 @@ extension HomeViewController: UITableViewDataSource {
         if isLoading {
             return 6
         } else {
-            return countries.count
+            return countriesSearched.count > 0 ? countriesSearched.count : countries.count
         }
     }
     
@@ -54,7 +67,7 @@ extension HomeViewController: UITableViewDataSource {
         if isLoading {
             return rootView.list.dequeueReusableCell(withIdentifier: "CountryCellSkeleton", for: indexPath) as! CountryCellSkeleton
         } else {
-            let country = countries[indexPath.row]
+            let country = countriesSearched.count > 0 ? countriesSearched[indexPath.row] : countries[indexPath.row]
             
             let cell = rootView.list.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath) as! CountryCell
             cell.flag.imageFromURL(country.flag)
@@ -68,12 +81,18 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !isLoading {
-            let countrySelected = countries[indexPath.row]
+            let countrySelected = countriesSearched.count > 0 ? countriesSearched[indexPath.row] : countries[indexPath.row]
             
             let controller = DetailsViewController()
             controller.searchCode = countrySelected.code
             navigationController?.pushViewController(controller, animated: true)
         }
+    }
+}
+
+extension HomeViewController: UITextFieldDelegate {    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        searchCountries(for: textField.text!)
     }
 }
 

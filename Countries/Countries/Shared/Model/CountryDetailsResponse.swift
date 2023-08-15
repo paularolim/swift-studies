@@ -30,6 +30,6 @@ struct CountryDetailsResponse: Decodable {
     
     struct Currency: Decodable {
         let name: String
-        let symbol: String
+        let symbol: String?
     }
 }

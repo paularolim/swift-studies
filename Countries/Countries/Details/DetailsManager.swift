@@ -52,7 +52,8 @@ struct DetailsManager {
             var currencies: [String] = []
             if response[0].currencies != nil {
                 for currency in response[0].currencies!.keys {
-                    currencies.append("\(response[0].currencies![currency]!.name) (\(response[0].currencies![currency]!.symbol))")
+                    let symbol = response[0].currencies![currency]!.symbol != nil ? "(\(response[0].currencies![currency]!.symbol!))" : ""
+                    currencies.append("\(response[0].currencies![currency]!.name) \(symbol)")
                 }
             }
 
