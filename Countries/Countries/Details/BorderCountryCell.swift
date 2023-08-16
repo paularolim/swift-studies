@@ -21,6 +21,7 @@ class BorderCountryCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.center = contentView.center
+        label.text = "<Title>"
         return label
     }()
     

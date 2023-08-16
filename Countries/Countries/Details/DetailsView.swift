@@ -17,37 +17,7 @@ class DetailsView: UIView {
         return scroll
     }()
     
-    private lazy var verticalStack: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 8
-        stack.addArrangedSubview(regionLabel)
-        stack.addArrangedSubview(separatorView1)
-        stack.addArrangedSubview(nameLabel)
-        stack.addArrangedSubview(capitalLabel)
-        stack.addArrangedSubview(separatorView2)
-        stack.addArrangedSubview(independentLabel)
-        stack.addArrangedSubview(areaLabel)
-        stack.addArrangedSubview(populationLabel)
-        stack.addArrangedSubview(languageLabel)
-        stack.addArrangedSubview(currenciesLabel)
-        return stack
-    }()
-    
-    private lazy var separatorView1 = {
-        let view = UIView()
-        view.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        return view
-    }()
-    
-    private lazy var separatorView2 = {
-        let view = UIView()
-        view.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        return view
-    }()
-    
-    lazy var flag: UIImageView = {
+    private lazy var flag: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .gray
@@ -64,85 +34,13 @@ class DetailsView: UIView {
         return gradient
     }()
     
-    lazy var nameLabel = {
-        let label = DSLabel()
-        label.font = UIFont.systemFont(ofSize: 38, weight: .bold)
-        label.numberOfLines = 0
-        label.text = " "
-        label.skeletonWidth = 220
-        label.startSkeleton()
-        return label
-    }()
+    private lazy var headerInfo = HeaderInfoView()
     
-    lazy var capitalLabel = {
-        let label = DSLabel()
-        label.font = UIFont.systemFont(ofSize: 28)
-        label.numberOfLines = 0
-        label.text = " "
-        label.skeletonWidth = 180
-        label.startSkeleton()
-        return label
-    }()
+    private lazy var otherInfos = OtherInfosView()
     
-    lazy var languageLabel = {
-        let label = DSLabel()
-        label.font = UIFont.systemFont(ofSize: 22)
-        label.numberOfLines = 0
-        label.text = " "
-        label.skeletonWidth = 180
-        label.startSkeleton()
-        return label
-    }()
+    private lazy var languageInfo = LanguageInfoView()
     
-    lazy var independentLabel = {
-        let label = DSLabel()
-        label.font = UIFont.systemFont(ofSize: 22)
-        label.numberOfLines = 0
-        label.text = " "
-        label.skeletonWidth = 180
-        label.startSkeleton()
-        return label
-    }()
-    
-    lazy var currenciesLabel = {
-        let label = DSLabel()
-        label.font = UIFont.systemFont(ofSize: 22)
-        label.numberOfLines = 0
-        label.text = " "
-        label.skeletonWidth = 180
-        label.startSkeleton()
-        return label
-    }()
-    
-    lazy var regionLabel = {
-        let label = DSLabel()
-        label.font = UIFont.systemFont(ofSize: 22)
-        label.numberOfLines = 0
-        label.text = " "
-        label.skeletonWidth = 180
-        label.startSkeleton()
-        return label
-    }()
-    
-    lazy var areaLabel = {
-        let label = DSLabel()
-        label.font = UIFont.systemFont(ofSize: 22)
-        label.numberOfLines = 0
-        label.text = " "
-        label.skeletonWidth = 180
-        label.startSkeleton()
-        return label
-    }()
-    
-    lazy var populationLabel = {
-        let label = DSLabel()
-        label.font = UIFont.systemFont(ofSize: 22)
-        label.numberOfLines = 0
-        label.text = " "
-        label.skeletonWidth = 180
-        label.startSkeleton()
-        return label
-    }()
+    private lazy var currencyInfo = CurrencyInfoView()
     
     lazy var borderCountries: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -166,15 +64,20 @@ class DetailsView: UIView {
         fatalError()
     }
     
+    func setupData(country: CountryDetails) {
+        flag.imageFromURL(country.flag)
+        headerInfo.setupData(name: country.name, capital: country.capital, region: country.region)
+        otherInfos.setupData(area: country.area, population: country.population, independent: country.independent)
+        languageInfo.setupData(language: [country.language])
+        currencyInfo.setupData(currencies: [country.currencies])
+    }
+    
     func stopSkeleton() {
-        nameLabel.stopSkeleton()
-        capitalLabel.stopSkeleton()
-        languageLabel.stopSkeleton()
-        independentLabel.stopSkeleton()
-        currenciesLabel.stopSkeleton()
-        regionLabel.stopSkeleton()
-        areaLabel.stopSkeleton()
-        populationLabel.stopSkeleton()
+        headerInfo.stopSkeleton()
+        otherInfos.stopSkeleton()
+        languageInfo.stopSkeleton()
+        currencyInfo.stopSkeleton()
+        
         flag.layer.sublayers?.removeAll()
     }
     
@@ -189,7 +92,10 @@ class DetailsView: UIView {
     private func addSubviews() {
         addSubview(flag)
         addSubview(scrollView)
-        scrollView.addSubview(verticalStack)
+        scrollView.addSubview(headerInfo)
+        scrollView.addSubview(otherInfos)
+        scrollView.addSubview(languageInfo)
+        scrollView.addSubview(currencyInfo)
         scrollView.addSubview(borderCountries)
         
         flag.layer.addSublayer(flagLayer)
@@ -201,23 +107,45 @@ class DetailsView: UIView {
         
         NSLayoutConstraint.activate([
             // flag position
-            flag.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
-            flag.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            flag.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            flag.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            flag.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            flag.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             flag.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 3),
             // scroll position
             scrollView.topAnchor.constraint(equalTo: flag.bottomAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            // stack position
-            verticalStack.topAnchor.constraint(equalTo: scrollContentGuide.topAnchor, constant: 24),
-            verticalStack.bottomAnchor.constraint(equalTo: borderCountries.topAnchor, constant: -48),
-            verticalStack.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
-            verticalStack.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
-            verticalStack.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
-            verticalStack.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
+            // header info
+            headerInfo.topAnchor.constraint(equalTo: scrollContentGuide.topAnchor, constant: 24),
+            headerInfo.bottomAnchor.constraint(equalTo: otherInfos.topAnchor, constant: -36),
+            headerInfo.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
+            headerInfo.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
+            headerInfo.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
+            headerInfo.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
+            // other infos
+            otherInfos.topAnchor.constraint(equalTo: headerInfo.bottomAnchor, constant: 36),
+            otherInfos.bottomAnchor.constraint(equalTo: languageInfo.topAnchor, constant: -36),
+            otherInfos.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
+            otherInfos.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
+            otherInfos.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
+            otherInfos.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
+            // language info
+            languageInfo.topAnchor.constraint(equalTo: otherInfos.bottomAnchor, constant: 36),
+            languageInfo.bottomAnchor.constraint(equalTo: currencyInfo.topAnchor, constant: -36),
+            languageInfo.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
+            languageInfo.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
+            languageInfo.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
+            languageInfo.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
+            // currency info
+            currencyInfo.topAnchor.constraint(equalTo: languageInfo.bottomAnchor, constant: 36),
+            currencyInfo.bottomAnchor.constraint(equalTo: borderCountries.topAnchor, constant: -36),
+            currencyInfo.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
+            currencyInfo.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
+            currencyInfo.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
+            currencyInfo.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
             // border countries
+            borderCountries.topAnchor.constraint(equalTo: currencyInfo.bottomAnchor, constant: 36),
             borderCountries.bottomAnchor.constraint(equalTo: scrollContentGuide.bottomAnchor),
             borderCountries.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor),
             borderCountries.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor),

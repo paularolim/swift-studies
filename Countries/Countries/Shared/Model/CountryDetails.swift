@@ -15,7 +15,7 @@ struct CountryDetails {
     let independent: Bool
     let currencies: String
     let region: String
-    let area: Int
+    let area: Double
     let population: Int
     let borders: [String]
 }

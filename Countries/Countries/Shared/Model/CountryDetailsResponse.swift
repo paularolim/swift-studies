@@ -17,7 +17,7 @@ struct CountryDetailsResponse: Decodable {
     
     let region: String
     let subregion: String?
-    let area: Int
+    let area: Double
     let population: Int
     
     let borders: [String]?
