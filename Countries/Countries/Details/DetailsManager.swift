@@ -73,7 +73,8 @@ struct DetailsManager {
                 currencies: currencies.joined(separator: " | "),
                 region: "\(response[0].region)" + (response[0].subregion != nil ? " >> \(response[0].subregion!)" : ""),
                 area: response[0].area,
-                population: response[0].population
+                population: response[0].population,
+                borders: response[0].borders ?? []
             )
         } catch {
             delegate?.didFailWithError(error: error)

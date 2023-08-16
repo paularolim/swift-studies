@@ -144,6 +144,17 @@ class DetailsView: UIView {
         return label
     }()
     
+    lazy var borderCountries: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = UIColor(named: "BackgroundColor")
+        collection.showsHorizontalScrollIndicator = false
+        collection.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+        return collection
+    }()
+    
     init() {
         super.init(frame: .zero)
         setupUI()
@@ -179,6 +190,7 @@ class DetailsView: UIView {
         addSubview(flag)
         addSubview(scrollView)
         scrollView.addSubview(verticalStack)
+        scrollView.addSubview(borderCountries)
         
         flag.layer.addSublayer(flagLayer)
     }
@@ -196,15 +208,22 @@ class DetailsView: UIView {
             // scroll position
             scrollView.topAnchor.constraint(equalTo: flag.bottomAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             // stack position
             verticalStack.topAnchor.constraint(equalTo: scrollContentGuide.topAnchor, constant: 24),
-            verticalStack.bottomAnchor.constraint(equalTo: scrollContentGuide.bottomAnchor),
-            verticalStack.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor),
-            verticalStack.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor),
-            verticalStack.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor),
-            verticalStack.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor),
+            verticalStack.bottomAnchor.constraint(equalTo: borderCountries.topAnchor, constant: -48),
+            verticalStack.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
+            verticalStack.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
+            verticalStack.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
+            verticalStack.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
+            // border countries
+            borderCountries.bottomAnchor.constraint(equalTo: scrollContentGuide.bottomAnchor),
+            borderCountries.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor),
+            borderCountries.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor),
+            borderCountries.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor),
+            borderCountries.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor),
+            borderCountries.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

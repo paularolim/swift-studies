@@ -17,4 +17,5 @@ struct CountryDetails {
     let region: String
     let area: Int
     let population: Int
+    let borders: [String]
 }

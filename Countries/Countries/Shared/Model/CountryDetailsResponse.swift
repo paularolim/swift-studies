@@ -19,6 +19,8 @@ struct CountryDetailsResponse: Decodable {
     let subregion: String?
     let area: Int
     let population: Int
+    
+    let borders: [String]?
 
     struct Name: Decodable {
         let common: String
