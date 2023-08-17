@@ -10,7 +10,6 @@ import UIKit
 class DetailsView: UIView {
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.showsVerticalScrollIndicator = false
         scroll.alwaysBounceVertical = true
         scroll.clipsToBounds = true
@@ -19,7 +18,6 @@ class DetailsView: UIView {
     
     private lazy var flag: UIImageView = {
         let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .gray
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
@@ -46,7 +44,6 @@ class DetailsView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = UIColor(named: "BackgroundColor")
         collection.showsHorizontalScrollIndicator = false
         collection.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
@@ -105,53 +102,57 @@ class DetailsView: UIView {
         let scrollContentGuide = scrollView.contentLayoutGuide
         let scrollFrameGuide = scrollView.frameLayoutGuide
         
+        let flagHeight = UIScreen.main.bounds.height / 3
+        
+        flag.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            // flag position
             flag.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             flag.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             flag.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            flag.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 3),
-            // scroll position
+            flag.heightAnchor.constraint(equalToConstant: flagHeight)
+        ])
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: flag.bottomAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            // header info
-            headerInfo.topAnchor.constraint(equalTo: scrollContentGuide.topAnchor, constant: 24),
-            headerInfo.bottomAnchor.constraint(equalTo: otherInfos.topAnchor, constant: -36),
-            headerInfo.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
-            headerInfo.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
-            headerInfo.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
-            headerInfo.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
-            // other infos
-            otherInfos.topAnchor.constraint(equalTo: headerInfo.bottomAnchor, constant: 36),
-            otherInfos.bottomAnchor.constraint(equalTo: languageInfo.topAnchor, constant: -36),
-            otherInfos.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
-            otherInfos.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
-            otherInfos.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
-            otherInfos.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
-            // language info
-            languageInfo.topAnchor.constraint(equalTo: otherInfos.bottomAnchor, constant: 36),
-            languageInfo.bottomAnchor.constraint(equalTo: currencyInfo.topAnchor, constant: -36),
-            languageInfo.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
-            languageInfo.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
-            languageInfo.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
-            languageInfo.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
-            // currency info
-            currencyInfo.topAnchor.constraint(equalTo: languageInfo.bottomAnchor, constant: 36),
-            currencyInfo.bottomAnchor.constraint(equalTo: borderCountries.topAnchor, constant: -36),
-            currencyInfo.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: 24),
-            currencyInfo.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -24),
-            currencyInfo.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: 24),
-            currencyInfo.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -24),
-            // border countries
-            borderCountries.topAnchor.constraint(equalTo: currencyInfo.bottomAnchor, constant: 36),
-            borderCountries.bottomAnchor.constraint(equalTo: scrollContentGuide.bottomAnchor),
-            borderCountries.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor),
-            borderCountries.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor),
-            borderCountries.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor),
-            borderCountries.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+        configureSubviewConstraints(headerInfo, above: otherInfos)
+        
+        configureSubviewConstraints(otherInfos, below: headerInfo, above: languageInfo)
+        
+        configureSubviewConstraints(languageInfo, below: otherInfos, above: currencyInfo)
+        
+        configureSubviewConstraints(currencyInfo, below: languageInfo, above: borderCountries)
+        
+        configureSubviewConstraints(borderCountries, below: currencyInfo, horizontalSpacing: 0)
+        NSLayoutConstraint.activate([
             borderCountries.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    private func configureSubviewConstraints(
+        _ subview: UIView,
+        below aboveView: UIView? = nil,
+        above belowView: UIView? = nil,
+        verticalSpacing: CGFloat? = nil,
+        horizontalSpacing: CGFloat? = nil
+    ) {
+        let scrollContentGuide = scrollView.contentLayoutGuide
+        let scrollFrameGuide = scrollView.frameLayoutGuide
+        
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            subview.topAnchor.constraint(equalTo: aboveView?.bottomAnchor ?? scrollView.topAnchor, constant: verticalSpacing ?? 36),
+            subview.bottomAnchor.constraint(equalTo: belowView?.topAnchor ?? scrollView.bottomAnchor, constant: -(verticalSpacing ?? 36)),
+            subview.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: horizontalSpacing ?? 24),
+            subview.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -(horizontalSpacing ?? 24)),
+            subview.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: horizontalSpacing ?? 24),
+            subview.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -(horizontalSpacing ?? 24)),
         ])
     }
 }
