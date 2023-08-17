@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DA140E4F2A8ECCD10012C578 /* LayoutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA140E4E2A8ECCD10012C578 /* LayoutProtocol.swift */; };
+		DA140E532A8EDC660012C578 /* DSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA140E522A8EDC660012C578 /* DSImage.swift */; };
 		DA1FCEBA2A7D73E600C328B9 /* DSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FCEB92A7D73E600C328B9 /* DSLabel.swift */; };
 		DA486B362A8D4D6E00969715 /* BorderCountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA486B352A8D4D6E00969715 /* BorderCountryCell.swift */; };
 		DA486B392A8D600F00969715 /* BordersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA486B382A8D600F00969715 /* BordersView.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		DA140E4E2A8ECCD10012C578 /* LayoutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutProtocol.swift; sourceTree = "<group>"; };
+		DA140E522A8EDC660012C578 /* DSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSImage.swift; sourceTree = "<group>"; };
 		DA1FCEB92A7D73E600C328B9 /* DSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSLabel.swift; sourceTree = "<group>"; };
 		DA486B352A8D4D6E00969715 /* BorderCountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderCountryCell.swift; sourceTree = "<group>"; };
 		DA486B382A8D600F00969715 /* BordersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BordersView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				DA1FCEB92A7D73E600C328B9 /* DSLabel.swift */,
+				DA140E522A8EDC660012C578 /* DSImage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				DA1FCEBA2A7D73E600C328B9 /* DSLabel.swift in Sources */,
 				DA140E4F2A8ECCD10012C578 /* LayoutProtocol.swift in Sources */,
 				DA486B422A8D716900969715 /* OtherInfosView.swift in Sources */,
+				DA140E532A8EDC660012C578 /* DSImage.swift in Sources */,
 				DA4CFE122A7AF5C30090E38B /* Country.swift in Sources */,
 				DAF003122A7C46AC00E05EEA /* CountryCell.swift in Sources */,
 				DAF0030E2A7C2B7100E05EEA /* CountryCellSkeleton.swift in Sources */,

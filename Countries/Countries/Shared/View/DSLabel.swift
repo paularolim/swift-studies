@@ -24,7 +24,6 @@ class DSLabel: UILabel {
         let gradient = CAGradientLayer()
         gradient.startPoint = CGPoint(x: 0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1, y: 0.5)
-        gradient.frame = CGRect(x: 0, y: 0, width: 80, height: 21)
         gradient.cornerRadius = 8
         return gradient
     }()

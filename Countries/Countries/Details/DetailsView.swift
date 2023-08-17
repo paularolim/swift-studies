@@ -16,20 +16,13 @@ class DetailsView: UIView {
         return scroll
     }()
     
-    private lazy var flag: UIImageView = {
-        let image = UIImageView()
+    private lazy var flag: DSImage = {
+        let image = DSImage(frame: .zero)
         image.backgroundColor = .gray
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
+        image.startSkeleton()
         return image
-    }()
-    
-    private lazy var flagLayer = {
-        let gradient = CAGradientLayer()
-        gradient.startPoint = CGPoint(x: 0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 0.5)
-        gradient.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 3)
-        return gradient
     }()
     
     private lazy var headerInfo = HeaderInfoView()
@@ -120,10 +113,6 @@ extension DetailsView: LayoutProtocol {
     
     func setupUI() {
         backgroundColor = UIColor(named: "BackgroundColor")
-        
-        let flagGroup = makeAnimationGroup()
-        flagGroup.beginTime = 0.0
-        flagLayer.add(flagGroup, forKey: "backgroundColor")
     }
     
     func setupSubviews() {
@@ -134,17 +123,14 @@ extension DetailsView: LayoutProtocol {
         scrollView.addSubview(languageInfo)
         scrollView.addSubview(currencyInfo)
         scrollView.addSubview(borderCountries)
-        
-        flag.layer.addSublayer(flagLayer)
     }
     
     func stopSkeleton() {
+        flag.stopSkeleton()
         headerInfo.stopSkeleton()
         otherInfos.stopSkeleton()
         languageInfo.stopSkeleton()
         currencyInfo.stopSkeleton()
-
-        flag.layer.sublayers?.removeAll()
     }
     
     func setupData(data: CountryDetails) {

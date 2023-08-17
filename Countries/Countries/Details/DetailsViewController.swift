@@ -61,7 +61,7 @@ extension DetailsViewController: DetailsManagerDelegate {
     func didUpdateData(country: CountryDetails) {
         self.country = country
         DispatchQueue.main.async {
-            self.rootView.setupData(country: country)
+            self.rootView.setupData(data: country)
             self.rootView.stopSkeleton()
             self.rootView.borderCountries.reloadData()
         }
