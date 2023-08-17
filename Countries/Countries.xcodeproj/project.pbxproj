@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA140E4F2A8ECCD10012C578 /* LayoutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA140E4E2A8ECCD10012C578 /* LayoutProtocol.swift */; };
 		DA1FCEBA2A7D73E600C328B9 /* DSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FCEB92A7D73E600C328B9 /* DSLabel.swift */; };
 		DA486B362A8D4D6E00969715 /* BorderCountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA486B352A8D4D6E00969715 /* BorderCountryCell.swift */; };
 		DA486B392A8D600F00969715 /* BordersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA486B382A8D600F00969715 /* BordersView.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA140E4E2A8ECCD10012C578 /* LayoutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutProtocol.swift; sourceTree = "<group>"; };
 		DA1FCEB92A7D73E600C328B9 /* DSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSLabel.swift; sourceTree = "<group>"; };
 		DA486B352A8D4D6E00969715 /* BorderCountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderCountryCell.swift; sourceTree = "<group>"; };
 		DA486B382A8D600F00969715 /* BordersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BordersView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA140E4D2A8ECCB20012C578 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DAF002FB2A7C06AF00E05EEA /* SkeletonLoadable.swift */,
+				DA140E4E2A8ECCD10012C578 /* LayoutProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		DA1FCEB82A7D73D200C328B9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,11 +205,11 @@
 		DAF002F02A7BF03E00E05EEA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				DA140E4D2A8ECCB20012C578 /* Protocols */,
 				DADA2CB32A7DA3A70030B002 /* Extension */,
 				DA1FCEB82A7D73D200C328B9 /* View */,
 				DA4CFE102A7AF5B50090E38B /* Model */,
 				DAF003062A7C21D800E05EEA /* CustomViewController.swift */,
-				DAF002FB2A7C06AF00E05EEA /* SkeletonLoadable.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -289,6 +300,7 @@
 				DAF002FC2A7C06AF00E05EEA /* SkeletonLoadable.swift in Sources */,
 				DAF0030C2A7C277900E05EEA /* HomeView.swift in Sources */,
 				DA1FCEBA2A7D73E600C328B9 /* DSLabel.swift in Sources */,
+				DA140E4F2A8ECCD10012C578 /* LayoutProtocol.swift in Sources */,
 				DA486B422A8D716900969715 /* OtherInfosView.swift in Sources */,
 				DA4CFE122A7AF5C30090E38B /* Country.swift in Sources */,
 				DAF003122A7C46AC00E05EEA /* CountryCell.swift in Sources */,

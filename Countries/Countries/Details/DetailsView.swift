@@ -53,55 +53,39 @@ class DetailsView: UIView {
     init() {
         super.init(frame: .zero)
         setupUI()
-        addSubviews()
-        addConstraints()
+        setupSubviews()
+        setupConstraints()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
-    func setupData(country: CountryDetails) {
-        flag.imageFromURL(country.flag)
-        headerInfo.setupData(name: country.name, capital: country.capital, region: country.region)
-        otherInfos.setupData(area: country.area, population: country.population, independent: country.independent)
-        languageInfo.setupData(language: [country.language])
-        currencyInfo.setupData(currencies: [country.currencies])
-    }
-    
-    func stopSkeleton() {
-        headerInfo.stopSkeleton()
-        otherInfos.stopSkeleton()
-        languageInfo.stopSkeleton()
-        currencyInfo.stopSkeleton()
-        
-        flag.layer.sublayers?.removeAll()
-    }
-    
-    private func setupUI() {
-        backgroundColor = UIColor(named: "BackgroundColor")
-        
-        let flagGroup = makeAnimationGroup()
-        flagGroup.beginTime = 0.0
-        flagLayer.add(flagGroup, forKey: "backgroundColor")
-    }
-    
-    private func addSubviews() {
-        addSubview(flag)
-        addSubview(scrollView)
-        scrollView.addSubview(headerInfo)
-        scrollView.addSubview(otherInfos)
-        scrollView.addSubview(languageInfo)
-        scrollView.addSubview(currencyInfo)
-        scrollView.addSubview(borderCountries)
-        
-        flag.layer.addSublayer(flagLayer)
-    }
-    
-    private func addConstraints() {
+    required init?(coder: NSCoder) { nil }
+
+    private func configureSubviewConstraints(
+        _ subview: UIView,
+        below aboveView: UIView? = nil,
+        above belowView: UIView? = nil,
+        verticalSpacing: CGFloat? = nil,
+        horizontalSpacing: CGFloat? = nil
+    ) {
         let scrollContentGuide = scrollView.contentLayoutGuide
         let scrollFrameGuide = scrollView.frameLayoutGuide
         
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            subview.topAnchor.constraint(equalTo: aboveView?.bottomAnchor ?? scrollView.topAnchor, constant: verticalSpacing ?? 36),
+            subview.bottomAnchor.constraint(equalTo: belowView?.topAnchor ?? scrollView.bottomAnchor, constant: -(verticalSpacing ?? 36)),
+            subview.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: horizontalSpacing ?? 24),
+            subview.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -(horizontalSpacing ?? 24)),
+            subview.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: horizontalSpacing ?? 24),
+            subview.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -(horizontalSpacing ?? 24)),
+        ])
+    }
+}
+
+extension DetailsView: LayoutProtocol {
+    typealias T = CountryDetails
+    
+    func setupConstraints() {
         let flagHeight = UIScreen.main.bounds.height / 3
         
         flag.translatesAutoresizingMaskIntoConstraints = false
@@ -134,26 +118,41 @@ class DetailsView: UIView {
         ])
     }
     
-    private func configureSubviewConstraints(
-        _ subview: UIView,
-        below aboveView: UIView? = nil,
-        above belowView: UIView? = nil,
-        verticalSpacing: CGFloat? = nil,
-        horizontalSpacing: CGFloat? = nil
-    ) {
-        let scrollContentGuide = scrollView.contentLayoutGuide
-        let scrollFrameGuide = scrollView.frameLayoutGuide
+    func setupUI() {
+        backgroundColor = UIColor(named: "BackgroundColor")
         
-        subview.translatesAutoresizingMaskIntoConstraints = false
+        let flagGroup = makeAnimationGroup()
+        flagGroup.beginTime = 0.0
+        flagLayer.add(flagGroup, forKey: "backgroundColor")
+    }
+    
+    func setupSubviews() {
+        addSubview(flag)
+        addSubview(scrollView)
+        scrollView.addSubview(headerInfo)
+        scrollView.addSubview(otherInfos)
+        scrollView.addSubview(languageInfo)
+        scrollView.addSubview(currencyInfo)
+        scrollView.addSubview(borderCountries)
         
-        NSLayoutConstraint.activate([
-            subview.topAnchor.constraint(equalTo: aboveView?.bottomAnchor ?? scrollView.topAnchor, constant: verticalSpacing ?? 36),
-            subview.bottomAnchor.constraint(equalTo: belowView?.topAnchor ?? scrollView.bottomAnchor, constant: -(verticalSpacing ?? 36)),
-            subview.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor, constant: horizontalSpacing ?? 24),
-            subview.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor, constant: -(horizontalSpacing ?? 24)),
-            subview.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: horizontalSpacing ?? 24),
-            subview.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: -(horizontalSpacing ?? 24)),
-        ])
+        flag.layer.addSublayer(flagLayer)
+    }
+    
+    func stopSkeleton() {
+        headerInfo.stopSkeleton()
+        otherInfos.stopSkeleton()
+        languageInfo.stopSkeleton()
+        currencyInfo.stopSkeleton()
+
+        flag.layer.sublayers?.removeAll()
+    }
+    
+    func setupData(data: CountryDetails) {
+        flag.imageFromURL(data.flag)
+        headerInfo.setupData(name: data.name, capital: data.capital, region: data.region)
+        otherInfos.setupData(area: data.area, population: data.population, independent: data.independent)
+        languageInfo.setupData(language: [data.language])
+        currencyInfo.setupData(currencies: [data.currencies])
     }
 }
 
