@@ -7,11 +7,27 @@
 
 import UIKit
 
+protocol LogoutViewControllerDelegate: AnyObject {
+    func didLogout()
+}
+
+protocol LoginViewControllerDelegate: AnyObject {
+    func didLogin()
+}
+
 class LoginViewController: UIViewController {
     let loginView = LoginView()
     
+    weak var delegate: LoginViewControllerDelegate?
+    
     override func viewDidLoad() {
         setup()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        loginView.configureView(shouldLoad: false)
     }
 }
 
@@ -37,8 +53,8 @@ extension LoginViewController {
         }
         
         if username == "Abc" && password == "123" {
-            print("Welcome!")
             loginView.configureView(shouldLoad: true)
+            delegate?.didLogin()
             return
         }
         

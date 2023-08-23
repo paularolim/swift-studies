@@ -48,14 +48,14 @@ struct DesignSystem {
         return label
     }
     
-    func createStackView() -> UIStackView {
+    func createStackView(backgroundColor: UIColor? = nil, spacing: CGFloat? = nil) -> UIStackView {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.backgroundColor = .secondarySystemBackground
+        stack.backgroundColor = backgroundColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-        stack.spacing = 8
+        stack.spacing = spacing ?? 8
         stack.layer.cornerRadius = 8
         stack.clipsToBounds = true
         return stack

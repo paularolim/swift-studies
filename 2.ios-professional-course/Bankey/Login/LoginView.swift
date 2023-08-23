@@ -24,7 +24,7 @@ class LoginView: UIView {
     
     private lazy var descriptionLabel: UILabel = ds.createLabel(text: "Your premium source for all things banking!", fontSize: .title3)
     
-    private lazy var stackView: UIStackView = ds.createStackView()
+    private lazy var stackView: UIStackView = ds.createStackView(backgroundColor: .secondarySystemBackground)
     
     private lazy var dividerView: UIView = ds.createDivider()
     
@@ -119,6 +119,6 @@ extension LoginView {
     }
     
     func configureView(shouldLoad: Bool) {
-        signInButton.configuration?.showsActivityIndicator = true
+        signInButton.configuration?.showsActivityIndicator = shouldLoad
     }
 }
