@@ -18,6 +18,7 @@
 		DA882EDF2A956120001A10C6 /* OnboardingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA882EDE2A956120001A10C6 /* OnboardingContainerViewController.swift */; };
 		DA9517B62A96953300C69812 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9517B52A96953300C69812 /* HomeViewController.swift */; };
 		DA9517BA2A96B36800C69812 /* LocalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9517B92A96B36800C69812 /* LocalState.swift */; };
+		DA9517BC2A96B57F00C69812 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9517BB2A96B57F00C69812 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		DA882EDE2A956120001A10C6 /* OnboardingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerViewController.swift; sourceTree = "<group>"; };
 		DA9517B52A96953300C69812 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DA9517B92A96B36800C69812 /* LocalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalState.swift; sourceTree = "<group>"; };
+		DA9517BB2A96B57F00C69812 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				DA882ED92A955A19001A10C6 /* Onboarding */,
 				DA882ED22A954A63001A10C6 /* Shared */,
 				DA882EB92A9532A7001A10C6 /* AppDelegate.swift */,
+				DA9517BB2A96B57F00C69812 /* MainViewController.swift */,
 				DA882EC22A9532A8001A10C6 /* Assets.xcassets */,
 				DA882EC42A9532A8001A10C6 /* LaunchScreen.storyboard */,
 				DA882EC72A9532A8001A10C6 /* Info.plist */,
@@ -211,6 +214,7 @@
 				DA882ECF2A953345001A10C6 /* LoginViewController.swift in Sources */,
 				DA882EBA2A9532A7001A10C6 /* AppDelegate.swift in Sources */,
 				DA882EDF2A956120001A10C6 /* OnboardingContainerViewController.swift in Sources */,
+				DA9517BC2A96B57F00C69812 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
