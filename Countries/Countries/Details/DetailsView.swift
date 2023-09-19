@@ -33,14 +33,10 @@ class DetailsView: UIView {
     
     private lazy var currencyInfo = CurrencyInfoView()
     
-    lazy var borderCountries: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = UIColor(named: "BackgroundColor")
-        collection.showsHorizontalScrollIndicator = false
-        collection.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-        return collection
+    lazy var bordersInfo: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        return view
     }()
     
     init() {
@@ -103,11 +99,11 @@ extension DetailsView: LayoutProtocol {
         
         configureSubviewConstraints(languageInfo, below: otherInfos, above: currencyInfo)
         
-        configureSubviewConstraints(currencyInfo, below: languageInfo, above: borderCountries)
+        configureSubviewConstraints(currencyInfo, below: languageInfo, above: bordersInfo)
         
-        configureSubviewConstraints(borderCountries, below: currencyInfo, horizontalSpacing: 0)
+        configureSubviewConstraints(bordersInfo, below: currencyInfo, verticalSpacing: 0, horizontalSpacing: 0)
         NSLayoutConstraint.activate([
-            borderCountries.heightAnchor.constraint(equalToConstant: 50)
+            bordersInfo.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -122,7 +118,7 @@ extension DetailsView: LayoutProtocol {
         scrollView.addSubview(otherInfos)
         scrollView.addSubview(languageInfo)
         scrollView.addSubview(currencyInfo)
-        scrollView.addSubview(borderCountries)
+        scrollView.addSubview(bordersInfo)
     }
     
     func stopSkeleton() {

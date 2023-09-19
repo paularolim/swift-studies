@@ -9,11 +9,13 @@ import UIKit
 
 class BordersView: UIView {
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var titleLabel = {
+        let label = DSLabel()
+        label.font = UIFont.systemFont(ofSize: 22)
+        label.numberOfLines = 0
         label.text = "Borders"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.skeletonWidth = 180
+        label.startSkeleton()
         return label
     }()
     
@@ -38,6 +40,8 @@ class BordersView: UIView {
     required init?(coder: NSCoder) { nil }
     
     private func setupSubviews() {
+        translatesAutoresizingMaskIntoConstraints = false
+        
         addSubview(titleLabel)
         addSubview(countries)
     }
